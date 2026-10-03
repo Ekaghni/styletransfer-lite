@@ -1,0 +1,60 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "styletransfer-lite"
+version = "0.1.0"
+description = "Fast neural style transfer in Python: 26 built-in styles, any painting as a style, CLI, GUI and video. Small install, no TensorFlow or PyTorch."
+readme = "README.md"
+requires-python = ">=3.8"
+license = { text = "MIT" }
+authors = [{ name = "Ekaghni", email = "ekaghni.mukherjee@gmail.com" }]
+keywords = [
+    "style transfer", "neural style transfer", "fast style transfer", "image stylization",
+    "arbitrary style transfer", "onnx", "onnxruntime", "deep learning", "computer vision",
+    "image processing", "cli", "video style transfer",
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Intended Audience :: End Users/Desktop",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Multimedia :: Graphics",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Scientific/Engineering :: Image Processing",
+]
+dependencies = ["numpy", "Pillow>=9.0", "onnxruntime>=1.15"]
+
+[project.optional-dependencies]
+video = ["opencv-python>=4.5"]
+dev = ["pytest", "build", "twine"]
+
+[project.scripts]
+styletransfer-lite = "styletransfer_lite.cli:main"
+
+[project.gui-scripts]
+styletransfer-lite-gui = "styletransfer_lite.gui:launch"
+
+[project.urls]
+Homepage = "https://github.com/Ekaghni/styletransfer-lite"
+Issues = "https://github.com/Ekaghni/styletransfer-lite/issues"
+Changelog = "https://github.com/Ekaghni/styletransfer-lite/blob/main/CHANGELOG.md"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+styletransfer_lite = ["models/*.onnx"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = ["slow: runs a model on a real image"]
